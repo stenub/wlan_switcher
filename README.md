@@ -30,7 +30,7 @@ Einrichtung:
 
 1. Wenn nicht bereits vorhanden: Installation von python3
 
-	Skript wurde mit python3.4 getestet und erstellt.
+	`Das Skript wurde mit python3.4.2 getestet und erstellt.`
 2. Wenn nicht bereits vorhanden: Installaton von 'requests': http://docs.python-requests.org/en/latest/
 
 	`pip install requests`
