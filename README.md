@@ -27,21 +27,21 @@ Speedport W724V WLAN_Switcher
  Bitte bei Bedarf nachinstallieren!
  
  Einrichtung:
- -Wenn nicht bereits vorhanden: Installation von python3
-    Skript wurde mit python3.4 getestet und erstellt.
- -Wenn nicht bereits vorhanden: Installaton von 'requests': http://docs.python-requests.org/en/latest/
-    pip install requests 
- -wlan_switcher.py in ein leeres Verzeichnis kopieren und ausführbar machen: chmod u+x wlan_switcher.py
-   Beim erstmaligen Start durch ./wlan_switcher.py wir im selben Verzeichnis eine wlan_switcher.conf erstellt
- -wlan_switcher.conf anpassen!
+ 1. Wenn nicht bereits vorhanden: Installation von python3
+      Skript wurde mit python3.4 getestet und erstellt.
+ 2. Wenn nicht bereits vorhanden: Installaton von 'requests': http://docs.python-requests.org/en/latest/
+      pip install requests
+ 3. wlan_switcher.py in ein leeres Verzeichnis kopieren und ausführbar machen: chmod u+x wlan_switcher.py
+      Beim erstmaligen Start durch ./wlan_switcher.py wir im selben Verzeichnis eine wlan_switcher.conf erstellt
+ 4. wlan_switcher.conf anpassen!
  
  Benutzung:
- Um zB das 2,4GHz Modul zu deaktivieren:
-  ./wlan_switcher.py -w 2,4 -s off
- Zum Überprüfen ob wlan_switcher korrekt funktioniert kann -v mit angegeben werden:
-  ./wlan_switcher.py -w 2,4 -s off -v
-  Wenn in der letzten Zeile der Ausgabe folgender Text steht war der Vorgang erfolgreich:
-  Vorgangsstatus: WLAN-Modul: 2,4 GHz, Schaltzustand: off --> ok
+ * Um zB das 2,4GHz Modul zu deaktivieren:
+    * ./wlan_switcher.py -w 2,4 -s off
+ * Zum Überprüfen ob wlan_switcher korrekt funktioniert kann -v mit angegeben werden:
+    * ./wlan_switcher.py -w 2,4 -s off -v
+ * Wenn in der letzten Zeile der Ausgabe folgender Text steht war der Vorgang erfolgreich:
+    * Vorgangsstatus: WLAN-Modul: 2,4 GHz, Schaltzustand: off --> ok
  
  
  Mögliche Kommandozeilenparameter:
