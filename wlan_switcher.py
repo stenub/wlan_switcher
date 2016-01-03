@@ -71,7 +71,7 @@ import sys
 def read_cmd_params():
     parser = argparse.ArgumentParser(description="Mögliche Optionen:")
     parser.add_argument("-w", "--wlan", dest="freq",
-                        choices=["2,4 ", "5"],
+                        choices=["2,4", "5"],
                         required="True",
                         help="Das zu schaltende WLAN-Modul: mögliche Werte sind 2,4 und 5")
     parser.add_argument("-s", "--switch", dest="switch",
