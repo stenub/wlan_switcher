@@ -1,4 +1,3 @@
-#!/Library/Frameworks/Python.framework/Versions/3.4/bin/python3 #############
 #!/usr/bin/python3
 #
 #    Speedport W724V - WLAN SWITCHER
