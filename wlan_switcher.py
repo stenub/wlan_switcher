@@ -99,7 +99,7 @@ def write_config_file():
                     "#####################################################################\n" \
                     "#\n" \
                     "# Bitte unbedingt die IP-Adresse des Speedports (router_ip) und das\n" \
-                    "# Router-Passwort (router_pw) an die eigenen Werte an passen!\n" \
+                    "# Router-Passwort (router_pw) an die eigenen Werte anpassen!\n" \
                     "# Anschließend 'Routerdaten wurden angepasst:' auf 'true' setzen!\n" \
                     "#\n" \
                     "#####################################################################\n" \
