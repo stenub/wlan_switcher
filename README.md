@@ -28,11 +28,11 @@ Speedport W724V WLAN_Switcher
  
  Einrichtung:
  1. Wenn nicht bereits vorhanden: Installation von python3
-      Skript wurde mit python3.4 getestet und erstellt.
+   * Skript wurde mit python3.4 getestet und erstellt.
  2. Wenn nicht bereits vorhanden: Installaton von 'requests': http://docs.python-requests.org/en/latest/
-      pip install requests
+   * pip install requests
  3. wlan_switcher.py in ein leeres Verzeichnis kopieren und ausführbar machen: chmod u+x wlan_switcher.py
-      Beim erstmaligen Start durch ./wlan_switcher.py wir im selben Verzeichnis eine wlan_switcher.conf erstellt
+   * Beim erstmaligen Start durch ./wlan_switcher.py wir im selben Verzeichnis eine wlan_switcher.conf erstellt
  4. wlan_switcher.conf anpassen!
  
  Benutzung:
