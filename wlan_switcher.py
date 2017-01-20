@@ -82,7 +82,10 @@ def read_cmd_params():
     parser.add_argument("-v", "--verbose",
                         action="store_true",
                         help="Schreibe Statusmeldungen to stdout")
-
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(1)
+    
     return parser.parse_args()
 
 
