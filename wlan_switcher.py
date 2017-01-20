@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 #
 #    Speedport W724V - WLAN SWITCHER
-#    Copyright (C) 2016  Stefan Nuber
+#    Copyright (C) 2017  Stefan Nuber
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -64,6 +64,7 @@ import re
 import argparse
 import configparser
 import sys
+import json
 
 
 # Funkton zum Einlesen der Kommandozeilenparameter:
@@ -71,12 +72,13 @@ def read_cmd_params():
     parser = argparse.ArgumentParser(description="Mögliche Optionen:")
     parser.add_argument("-w", "--wlan", dest="freq",
                         choices=["2,4", "5"],
-                        required="True",
                         help="Das zu schaltende WLAN-Modul: mögliche Werte sind 2,4 und 5")
     parser.add_argument("-s", "--switch", dest="switch",
-                        required="True",
                         choices=["on", "off"],
                         help="Ein oder Ausschalten: mögliche Werte sind 'on' und 'off'")
+    parser.add_argument("-p", "--phonecalls", dest="calltype",
+                        choices=["taken", "dialed", "missed"],
+                        help="Ausgabe sämtlicher Telefonanrufe: mögliche Werte sind 'taken', 'dialed' und 'missed'")
     parser.add_argument("-v", "--verbose",
                         action="store_true",
                         help="Schreibe Statusmeldungen to stdout")
@@ -103,7 +105,7 @@ def write_config_file():
                     "#\n" \
                     "#####################################################################\n" \
                     "#\n" \
-                    "# Stefan Nuber, 03.01.2016, GNU GPL\n" \
+                    "# Stefan Nuber, 20.01.2017, GNU GPL\n" \
                     "#\n" \
                     "#\n"
 
@@ -135,7 +137,8 @@ def generiere_urls(router_ip):
     url_main = url_router + '/html/content/overview/index.html?lang=de'
     url_modules_json = url_router + '/data/Modules.json'
     url_modules_json_headers = {'Referer': url_router + '/html/content/overview/index.html?lang=de'}
-    return url_router, url_login, url_main, url_modules_json, url_modules_json_headers
+    url_phonecalls_json = url_router + '/data/PhoneCalls.json'
+    return url_router, url_login, url_main, url_modules_json, url_modules_json_headers, url_phonecalls_json
 
 
 # Generiere md5 Hash für password
@@ -178,6 +181,22 @@ def pagerequest(url, session):
     return httoken, session
 
 
+# Funktion zur Decodierung und Ausgabe der gewünschten Anrufliste
+def calldecode(page, calltype):
+    page_decoded = json.loads(page.content.decode('utf-8'))
+    for i in page_decoded:
+        # print(i)
+        if i["varid"] == "add" + calltype + "calls":
+            # print(i["varvalue])
+            for j in i["varvalue"]:
+                if calltype == "dialed" and j["varid"] == "dialedcalls_duration" \
+                or calltype == "taken" and j["varid"] == "takencalls_duration" \
+                or calltype == "missed" and j["varid"] == "missedcalls_who":
+                    print(j["varid"], j["varvalue"])
+                else:
+                    print(j["varid"], j["varvalue"], end=", ")
+
+
 # Hauptfunktion
 def main():
     # Prüfe ob wlan_switcher.conf existiert:
@@ -193,7 +212,7 @@ def main():
     # Lese cmd_params ein:
     param = read_cmd_params()
     if param.verbose is True:
-        print(param.freq, param.switch, param.verbose)
+        print(param.freq, param.switch, param.calltype, param.verbose)
 
     # Starte neue http-Session:
     with requests.Session() as s:
@@ -213,6 +232,14 @@ def main():
         if param.verbose is True:
             printrequestandcontent(page)
 
+        # Abfrage der Telefonliste
+        if param.calltype:
+            page = s.get(router_urls[5], params={"_tn": httoken}, headers=router_urls[4])
+            if param.verbose is True:
+                printrequestandcontent(page)
+            calldecode(page, param.calltype)
+           
+        # Schalten des Wlan Moduls    
         page = s.post(router_urls[3], data=wlan(param.freq, param.switch, httoken), headers=router_urls[4])
         if param.verbose is True:
             print('Vorgangsstatus: WLAN-Modul:', param.freq, 'GHz, Schaltzustand:', param.switch, '-->',
