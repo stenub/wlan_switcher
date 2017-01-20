@@ -63,6 +63,6 @@ Mögliche Kommandozeilenparameter:
 `-h / --help`: Gibt eine Hilfe zu den verfügbaren Kommandozeilenparametern an.  
 `-w / --wlan`: 2,4 oder 5GHz -- Gibt an welches WLAN-Modul geschaltet werden soll.  
 `-s / --switch`: on oder off -- Gibt an ob das mit -w gewählte Modul ein oder ausgeschaltet werden soll.  
-`-p / --phonecalls` `missed`, `taken`, oder `dialed` -- Holt die entsprechende Anrufliste aus dem Router ab.
+`-p / --phonecalls` `missed`, `taken`, oder `dialed` -- Holt die entsprechende Anrufliste aus dem Router ab.  
 `-v / -- verbose`: Aktiviert die detailierte Ausgabe von Statusinformationen und Infos zu Fehlersuche.  
  
